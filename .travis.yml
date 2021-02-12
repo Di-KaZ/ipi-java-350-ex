@@ -2,9 +2,9 @@ language: java
 addons:
   sonarcloud:
     organization: "get-moussed"
-    token:
-      secure: "63b973f864ce0b819249451c3998e8359b4715bd" # encrypted value of your token
+    # token:
+    # secure: "63b973f864ce0b819249451c3998e8359b4715bd" # encrypted value of your token
 
 script:
   # the following command line builds the project, runs the tests with coverage and then execute the SonarCloud analysis
-  - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar
