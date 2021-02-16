@@ -24,7 +24,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestEmbaucheEmploye {
+class TestEmbaucheEmploye {
 	private String nom = "Toe";
 	private String prenom = "Jhon";
 
