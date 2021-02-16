@@ -2,6 +2,7 @@ package com.ipiecoles.java.java350.model;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.Locale;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -78,6 +79,8 @@ public class Employe {
 					var = var + 1;
 			case SATURDAY:
 				var = var + 1;
+				break;
+			default:
 				break;
 		}
 		int monInt = (int) Entreprise.joursFeries(d).stream()
@@ -199,7 +202,7 @@ public class Employe {
 	 * @return the salaire
 	 */
 	public Double getSalaire() {
-		return salaire;
+		return Double.parseDouble(String.format(Locale.ROOT, "%.2f", salaire));
 	}
 
 	/**
