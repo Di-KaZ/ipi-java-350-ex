@@ -45,7 +45,7 @@ class TestEmbaucheEmploye {
 			"TECHNICIEN, MASTER, 1.0, T00001, 2129.71", "MANAGER, INGENIEUR, 1.0, M00001, 2433.95",
 			"TECHNICIEN, DOCTORAT, 0.5, T00001, 1293.04", "COMMERCIAL, CAP, 1.0, C00001, 1521.22",
 			"MANAGER, BAC, 1.0, M00001, 1673.34", "MANAGER, MASTER, 1.0, M00001, 2129.71", })
-	public void testEmbaucheEmploye(Poste poste, NiveauEtude nivEtu, Double tmpsPart, String matriculeFinal,
+	void testEmbaucheEmploye(Poste poste, NiveauEtude nivEtu, Double tmpsPart, String matriculeFinal,
 			Double salaireFinal) {
 
 		try {

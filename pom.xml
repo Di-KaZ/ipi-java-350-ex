@@ -15,7 +15,7 @@
 	<description>TP qualité logicielle IPI</description>
 
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.11</java.version>
 		<sonar.projectKey>Di-KaZ_ipi-java-350-ex</sonar.projectKey>
 		<sonar.organization>get-moussed</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
