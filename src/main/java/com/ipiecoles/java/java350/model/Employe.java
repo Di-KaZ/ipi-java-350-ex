@@ -137,7 +137,7 @@ public class Employe {
 					+ primeAnciennete;
 		}
 		// Au pro rata du temps partiel.
-		eturn prime * this.tempsPartiel;
+		return prime * this.tempsPartiel;
 	}
 
 	// Augmenter salaire
