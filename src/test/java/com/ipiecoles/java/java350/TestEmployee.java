@@ -88,7 +88,7 @@ class TestEmployee {
 	}
 
 	@ParameterizedTest
-	@CsvSource({ "'2019-01-01', 8", "'2021-01-01', 11", "'2022-01-01', 11", "'2032-01-01', 12" })
+	@CsvSource({ "'2019-01-01', 8", "'2021-01-01', 10", "'2022-01-01', 10", "'2032-01-01', 12" })
 	void testNbRTT(LocalDate date, Integer nbDeRTTAttendu) {
 		Employe employe = new Employe("Hello", "Wolrd", "M00567", LocalDate.now(), 1200.0, 1, 1.0);
 
