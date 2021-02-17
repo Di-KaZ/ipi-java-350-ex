@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.ipiecoles.java.java350.exception.EmployeException;
+
 @Entity
 public class Employe {
 
@@ -65,7 +67,7 @@ public class Employe {
 	}
 
 	public Integer getNbRtt(LocalDate d) {
-		int i1 = d.isLeapYear() ? 365 : 366;
+		int nbDaysInCurrentYear = d.isLeapYear() ? 365 : 366;
 		int var = 104;
 		switch (LocalDate.of(d.getYear(), 1, 1).getDayOfWeek()) {
 			case THURSDAY:
@@ -86,7 +88,8 @@ public class Employe {
 		int monInt = (int) Entreprise.joursFeries(d).stream()
 				.filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
 		return (int) Math
-				.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
+				.ceil((nbDaysInCurrentYear - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt)
+						* tempsPartiel);
 	}
 
 	/**
@@ -131,7 +134,14 @@ public class Employe {
 	}
 
 	// Augmenter salaire
-	// public void augmenterSalaire(double pourcentage){}
+	public void augmenterSalaire(double pourcentage) throws EmployeException {
+		if (pourcentage < 0.0) {
+			throw new EmployeException("Impossible d'augementer le salaire avec un pourcentage negatif");
+		} else if (pourcentage < 1.0) {
+			throw new EmployeException("Impossible d'augementer le salaire avec un pourcentage inferieur a 1");
+		}
+		salaire *= pourcentage;
+	}
 
 	public Long getId() {
 		return id;

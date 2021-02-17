@@ -1,18 +1,20 @@
 # TP sur la qualité logicielle
 
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Di-KaZ_ipi-java-350-ex&metric=coverage)](https://sonarcloud.io/dashboard?id=Di-KaZ_ipi-java-350-ex)
 Exercices de Java, module 350 pour l'IPI. Il est nécessaire de forker ce repository pour pouvoir faire tout le TP !! Après chaque question, pusher vos modifications sur votre repository.
 
 ## Pré-requis
 
 - Installer IntelliJ Ultimate en utilisant votre adresse IPI sur Jetbrains Student https://www.jetbrains.com/student/
-ou un autre IDE si vous avez l'habitude (Eclipse)
+  ou un autre IDE si vous avez l'habitude (Eclipse)
 - Si vous n'êtes pas familié avec Git, je vous recommande ce site : https://learngitbranching.js.org/ (faire au moins la première leçon du niveau 1)
-Via Microsoft Imagine, activer votre crédit étudiant Azure https://imagine.microsoft.com/fr-fr (ou via le mail reçu en début d'année, onthehub https://onthehub.com/)
+  Via Microsoft Imagine, activer votre crédit étudiant Azure https://imagine.microsoft.com/fr-fr (ou via le mail reçu en début d'année, onthehub https://onthehub.com/)
 - S'inscrire également au programme AWS Educate toujours avec votre adresse IPI (https://aws.amazon.com/fr/education/awseducate/).
 
 ## Introduction
 
-Questions à se poser : 
+Questions à se poser :
+
 - Que représente pour vous la qualité logicielle ?
 - Quels éléments faut-il pour avoir un logiciel de qualité ?
 - Dans un projet, qui est responsable de la qualité ?
@@ -23,31 +25,31 @@ Répondre de nouveau aux questions. Qu'est-ce qui a changé ?
 
 ## Intégration continue
 
-   1.	Ajoute à la racine du dossier, un fichier .travis.yml
-   2.	Ajouter dans ce fichier : les paramètres de config (`language: java`)
-   3.	Pushez le projet sur Git 
-   4.	Se connecter sur https://travis-ci.com/
-   5.	Allez dans Setting et activer l'intégration GitHub Apps
-   6.	Sélectionner votre repository
-   7.	Cliquer sur `Sync account`
-   8.	Cliquer sur `Trigger build` dans la liste d’options du build s'il ne se lance pas tout seul
-   9.	Patienter le temps du lancement du build 
-   10. Après chaque exercice, vérifier que le build passe toujours...
- 
+1.  Ajoute à la racine du dossier, un fichier .travis.yml
+2.  Ajouter dans ce fichier : les paramètres de config (`language: java`)
+3.  Pushez le projet sur Git
+4.  Se connecter sur https://travis-ci.com/
+5.  Allez dans Setting et activer l'intégration GitHub Apps
+6.  Sélectionner votre repository
+7.  Cliquer sur `Sync account`
+8.  Cliquer sur `Trigger build` dans la liste d’options du build s'il ne se lance pas tout seul
+9.  Patienter le temps du lancement du build
+10. Après chaque exercice, vérifier que le build passe toujours...
+
 ## Evaluation de la qualité
 
-   1.	Aller sur https://sonarcloud.io/
-   2.	Se connecter en liant son compte Github 
-   3.	Cliquer sur `New project`.
-   4.	Sélectionner le repository correspodnant
-   5.	Cliquer sur `Analyse new project`
-   6.	Cliquer `Create a project manually`
-   7.	Créer le token puis le récupérer en le copiant
-   8.	Dans Travis, aller dans `environnement variables`
-   9.	`SONAR_TOKEN` > le token > `Add`
-   10. Récupère le code yml qu'il faut ajouter dans le .travis.yml (attention à bien copier ce qui est à l'écran, pas à cliquer sur le bouton `Copy`)
-   11. Pushez puis relancer votre build sur Travis-ci.com
-   12. Analyser le premier rapport de Sonar
+1.  Aller sur https://sonarcloud.io/
+2.  Se connecter en liant son compte Github
+3.  Cliquer sur `New project`.
+4.  Sélectionner le repository correspodnant
+5.  Cliquer sur `Analyse new project`
+6.  Cliquer `Create a project manually`
+7.  Créer le token puis le récupérer en le copiant
+8.  Dans Travis, aller dans `environnement variables`
+9.  `SONAR_TOKEN` > le token > `Add`
+10. Récupère le code yml qu'il faut ajouter dans le .travis.yml (attention à bien copier ce qui est à l'écran, pas à cliquer sur le bouton `Copy`)
+11. Pushez puis relancer votre build sur Travis-ci.com
+12. Analyser le premier rapport de Sonar
 
 ## Tests unitaires
 
@@ -75,7 +77,7 @@ Tester de façon intégrée un cas nominal de la méthode `embaucheEmploye` de l
 
 ## Tests d'acceptation
 
-- Installer Gauge depuis https://gauge.org/. La méthode d'installation recommandée est via npm. Il faut donc installer NodeJS. D'autres méthodes sont possibles cependant. 
+- Installer Gauge depuis https://gauge.org/. La méthode d'installation recommandée est via npm. Il faut donc installer NodeJS. D'autres méthodes sont possibles cependant.
 - Ajouter le chemin de l'exécutable Gauge dans la variable d'environnement PATH. Vous pouvez utiliser la commande `where gauge` dans une invite de commande Windows, ou `which gauge` dans un terminal Linux.
 - À l'aide d'un terminal, vous positionner à la racine de votre projet Java et initialiser (à l'aide de la documentation) un nouveau projet Gauge Java. Déplacer le dossier `specs` dans le dossier `src/test/resources`.
 - Un projet d'exemple de Gauge avec Spring se trouve à cette adresse : https://github.com/getgauge-examples/ioc-spring
@@ -97,7 +99,8 @@ Commencer par faire une branche `evaluation` à partir de votre branche `master`
 
 - Tester de manière unitaire le plus exhaustivement possible la méthode `augmenterSalaire` d'`Employe` en essayant de faire du TDD. Décommenter la méthode dans `Employe` et écrire d'abord les tests entièrement (en réflechissant particulièrement aux cas limites) avant d'écrire la méthode. Pensez-vous que vous auriez écrit la méthode directement comme cela si vous n'aviez pas écrit les tests en premier ?
 - Tester unitairement (en utilisant les tests paramétrés) la méthode `getNbRtt` d'`Employe`. Le nombre de RTT se calcule à partir de la formule suivante : **Nombre de jours dans l'année - Nombre de jours travaillés dans l'année en plein temps - Nombre de samedi et dimanche dans l'année - Nombre de jours fériés ne tombant pas le week-end - Nombre de congés payés**. Le tout au pro-rata du taux d'activité du salarié. **Attention**, des erreurs sont présentes dans cette méthode. Faites donc vos calculs avant et débugguer votre code pour trouver les erreurs. Aidez-vous de Sonar... Rendre cette méthode plus propre, documentée et lisible.
-Infos : 
+  Infos :
+
   - 2019 : l'année est non bissextile, a débuté un mardi et il y a 10 jours fériés ne tombant pas le week-end.
   - 2021 : l'année est non bissextile, a débuté un vendredi et il y a 7 jours fériés ne tombant pas le week-end.
   - 2022 : l'année est non bissextile, a débuté un samedi et il y a 7 jours fériés ne tombant pas le week-end.
@@ -113,7 +116,7 @@ Infos :
 
 ## Autres
 
-- S'assurer que votre code passe et qu'il n'y a aucun *code smells* ou *anomalies* ou *bugs* bloquants, critiques ou majeurs. Si c'est le cas, corriger le code fourni.
+- S'assurer que votre code passe et qu'il n'y a aucun _code smells_ ou _anomalies_ ou _bugs_ bloquants, critiques ou majeurs. Si c'est le cas, corriger le code fourni.
 - S'assurer d'avoir 100% de couverture de code sur les méthodes testés dans l'évaluation. Vérifier la couverture de code avec mutation et à défaut d'atteindre 100%, essayer d'obtenir un bon niveau.
 
 ## Revue de code
