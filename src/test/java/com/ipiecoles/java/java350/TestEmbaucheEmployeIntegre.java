@@ -22,7 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class TestEmbaucheEmployeIntegre {
+class TestEmbaucheEmployeIntegre {
 	@Autowired
 	private EmployeRepository employeRepository;
 
@@ -40,7 +40,7 @@ public class TestEmbaucheEmployeIntegre {
 	}
 
 	@Test
-	public void testEmbuahceEmployeIntegre() throws EntityExistsException, EmployeException {
+	void testEmbuahceEmployeIntegre() throws EntityExistsException, EmployeException {
 		Employe employe = employeService.embaucheEmploye(nom, prenom, Poste.COMMERCIAL, NiveauEtude.LICENCE, tmpsPart);
 
 		Assertions.assertThat(employe.getMatricule()).isEqualTo("C00001");

@@ -16,7 +16,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class TestFindLastMatricule {
+class TestFindLastMatricule {
 	@Autowired
 	private EmployeRepository employeRepository;
 
@@ -31,7 +31,7 @@ public class TestFindLastMatricule {
 	}
 
 	@Test
-	public void testwithOneEmployee() {
+	void testwithOneEmployee() {
 		employeRepository.save(new Employe(nom, prenom, "T00001", LocalDate.now(), 1200.0, 1, 1.0));
 		Employe employe = employeRepository.findByMatricule("T00001");
 		Assertions.assertThat(employe).isNotNull();
@@ -44,7 +44,7 @@ public class TestFindLastMatricule {
 	}
 
 	@Test
-	public void testWithMutipleEmployee() {
+	void testWithMutipleEmployee() {
 		employeRepository.save(new Employe(nom, prenom, "T00001", LocalDate.now(), 1200.0, 1, 1.0));
 		employeRepository.save(new Employe(nom, prenom, "C00002", LocalDate.now(), 1200.0, 1, 1.0));
 		employeRepository.save(new Employe(nom, prenom, "M00003", LocalDate.now(), 1200.0, 1, 1.0));
@@ -59,7 +59,7 @@ public class TestFindLastMatricule {
 	}
 
 	@Test
-	public void testWithNoEmployee() {
+	void testWithNoEmployee() {
 		Employe employe = employeRepository.findByMatricule("T00001");
 		Assertions.assertThat(employe).isNull();
 	}
