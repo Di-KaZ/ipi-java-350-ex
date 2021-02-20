@@ -15,8 +15,8 @@ import com.ipiecoles.java.java350.repository.EmployeRepository;
 import com.ipiecoles.java.java350.service.EmployeService;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.runner.RunWith;
@@ -57,6 +57,29 @@ class TestCalculPerformanceComercial {
 
 		Assertions.assertThatThrownBy(() -> employeService.calculPerformanceCommercial(null, 10000L, 10000L))
 				.hasMessage("Le matricule ne peut être null et doit commencer par un C !");
+
+	}
+
+	@Test
+	public void testCalcPerfCommercialNeg() throws EntityExistsException, EmployeException {
+		employeService.embaucheEmploye("Zeubi", "La Mouche", Poste.COMMERCIAL, NiveauEtude.MASTER, 1.0);
+
+		ArgumentCaptor<Employe> eCaptor = ArgumentCaptor.forClass(Employe.class);
+		Mockito.verify(employeRepository, Mockito.times(1)).save(eCaptor.capture());
+
+		Assertions.assertThatThrownBy(
+				() -> employeService.calculPerformanceCommercial(eCaptor.getValue().getMatricule(), -1000L, 100000L))
+				.hasMessage("Le chiffre d'affaire traité ne peut être négatif ou null !");
+
+		Assertions.assertThatThrownBy(
+				() -> employeService.calculPerformanceCommercial(eCaptor.getValue().getMatricule(), 10000L, -1000L))
+				.hasMessage("L'objectif de chiffre d'affaire ne peut être négatif ou null !");
+
+		when(employeRepository.findByMatricule("C00001")).thenReturn(null);
+		Assertions.assertThatThrownBy(
+				() -> employeService.calculPerformanceCommercial(eCaptor.getValue().getMatricule(), 10000L, 1000L))
+				.hasMessage("Le matricule " + "C00001" + " n'existe pas !");
+
 	}
 
 	@Test

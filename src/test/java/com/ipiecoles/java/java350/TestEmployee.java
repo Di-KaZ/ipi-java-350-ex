@@ -7,7 +7,7 @@ import com.ipiecoles.java.java350.model.Employe;
 import com.ipiecoles.java.java350.model.Entreprise;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -45,6 +45,16 @@ class TestEmployee {
 		Assertions.assertThat(employee.getNombreAnneeAnciennete()).isZero();
 	}
 
+	@Test
+	public void testEmployeEquals() {
+		Employe bob = new Employe("Bob", "L'éponge", "M00001", LocalDate.now(), Entreprise.SALAIRE_BASE, 1, 1.0);
+		Employe patrick = new Employe("Patrick", "L'étoile de Mer", "T00002", LocalDate.now(), Entreprise.SALAIRE_BASE,
+				1, 1.0);
+
+		Assertions.assertThat(patrick).isEqualTo(patrick);
+		Assertions.assertThat(patrick).isNotEqualTo(bob);
+	}
+
 	@ParameterizedTest
 	@CsvSource({ "1, 'T12345', 0, 1.0, 1000.0", "1, 'T12345', 2, 0.5, 600.0", "1, 'T12345', 2, 1.0, 1200.0",
 			"2, 'T12345', 0, 1.0, 2300.0", "2, 'T12345', 1, 1.0, 2400.0", "1, 'M12345', 0, 1.0, 1700.0",
@@ -65,6 +75,7 @@ class TestEmployee {
 		Assertions.assertThatThrownBy(() -> employe.augmenterSalaire(pourcentage))
 				.hasMessage("Impossible d'augementer le salaire avec un pourcentage negatif");
 	}
+
 	@ParameterizedTest
 	@CsvSource({ "0.1", "0.5", "0.99" })
 	void testAugementerSalaireZeros(double pourcentage) {

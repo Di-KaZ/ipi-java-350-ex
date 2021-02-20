@@ -67,6 +67,12 @@ class TestEmbaucheEmploye {
 	@Test
 	public void testLimitEmbauche() {
 		when(employeRepository.findLastMatricule()).thenReturn("99999");
+		Assertions
+				.assertThatThrownBy(
+						() -> employeService.embaucheEmploye(nom, prenom, Poste.MANAGER, NiveauEtude.DOCTORAT, 1.0))
+				.hasMessage("Limite des 100000 matricules atteinte !");
+
+		when(employeRepository.findLastMatricule()).thenReturn("100000");
 
 		Assertions
 				.assertThatThrownBy(
