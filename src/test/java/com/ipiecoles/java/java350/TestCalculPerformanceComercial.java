@@ -28,7 +28,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class TestCalculPerformanceComercial {
+class TestCalculPerformanceComercial {
 	@InjectMocks
 	public EmployeService employeService;
 
@@ -83,7 +83,7 @@ public class TestCalculPerformanceComercial {
 			"1145, 1000, 6, 7",
 			// ! Cas 4 : +20% => +4 perf (Quel monstre)
 			"1545, 1000, 6, 10", })
-	public void testCalcPerfCommercial(Long caTraite, Long objectifCa, Integer perfBase, Integer perfAttendu)
+	void testCalcPerfCommercial(Long caTraite, Long objectifCa, Integer perfBase, Integer perfAttendu)
 			throws EntityExistsException, EmployeException {
 
 		String matricule = "C00001";

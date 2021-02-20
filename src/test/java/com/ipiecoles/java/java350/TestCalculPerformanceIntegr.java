@@ -25,7 +25,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
-public class TestCalculPerformanceIntegr {
+class TestCalculPerformanceIntegr {
 	@Autowired
 	public EmployeService employeService;
 
@@ -39,7 +39,7 @@ public class TestCalculPerformanceIntegr {
 	}
 
 	@Test
-	public void testCalcPerfCommercialNulls() throws EntityExistsException, EmployeException {
+	void testCalcPerfCommercialNulls() throws EntityExistsException, EmployeException {
 		Employe employe = employeService.embaucheEmploye("Zeubi", "La Mouche", Poste.COMMERCIAL, NiveauEtude.MASTER,
 				1.0);
 		Assertions
@@ -68,7 +68,7 @@ public class TestCalculPerformanceIntegr {
 			"1145, 1000, 6, 8", // + 1 car nouvel perf > avg perf
 			// ! Cas 5 : +20% => +4 perf (Quel monstre)
 			"1545, 1000, 6, 11", }) // +1 car nouvelle perf > avg perf
-	public void testCalcPerfCommercial(Long caTraite, Long objectifCa, Integer perfBase, Integer perfAttendu)
+	void testCalcPerfCommercial(Long caTraite, Long objectifCa, Integer perfBase, Integer perfAttendu)
 			throws EntityExistsException, EmployeException {
 
 		String matricule = "C00001";
