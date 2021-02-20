@@ -51,7 +51,7 @@ public class EmployeService {
 		Integer numeroMatricule = Integer.parseInt(lastMatricule) + 1;
 		if (numeroMatricule >= 100000) {
 			LOGGER.error(
-					"La limite de 100000 matricule est atteinte veuillez licencier des employés, ou contacter les developpeurs du logiciel �");
+					"La limite de 100000 matricule est atteinte veuillez licencier des employés, ou contacter les developpeurs du logiciel 🐒");
 			throw new EmployeException("Limite des 100000 matricules atteinte !");
 		}
 		// On complète le numéro avec des 0 à gauche

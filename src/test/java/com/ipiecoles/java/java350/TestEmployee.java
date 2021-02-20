@@ -14,7 +14,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 class TestEmployee {
 
 	@Test
-	public void testNbAneeAncieneteNoyears() {
+	void testNbAneeAncieneteNoyears() {
 		Employe employee = new Employe();
 
 		employee.setDateEmbauche(LocalDate.now());
@@ -22,7 +22,7 @@ class TestEmployee {
 	}
 
 	@Test
-	public void testNbAneeAncieneteNullyears() {
+	void testNbAneeAncieneteNullyears() {
 		Employe employee = new Employe();
 
 		employee.setDateEmbauche(null);
@@ -30,7 +30,7 @@ class TestEmployee {
 	}
 
 	@Test
-	public void testNbAneeAncieneteMinus2years() {
+	void testNbAneeAncieneteMinus2years() {
 		Employe employee = new Employe();
 
 		employee.setDateEmbauche(LocalDate.now().minusYears(2L));
@@ -38,7 +38,7 @@ class TestEmployee {
 	}
 
 	@Test
-	public void testNbAneeAncienetePlus2years() {
+	void testNbAneeAncienetePlus2years() {
 		Employe employee = new Employe();
 
 		employee.setDateEmbauche(LocalDate.now().plusYears(2L));
@@ -46,13 +46,12 @@ class TestEmployee {
 	}
 
 	@Test
-	public void testEmployeEquals() {
+	void testEmployeEquals() {
 		Employe bob = new Employe("Bob", "L'éponge", "M00001", LocalDate.now(), Entreprise.SALAIRE_BASE, 1, 1.0);
 		Employe patrick = new Employe("Patrick", "L'étoile de Mer", "T00002", LocalDate.now(), Entreprise.SALAIRE_BASE,
 				1, 1.0);
 
-		Assertions.assertThat(patrick).isEqualTo(patrick);
-		Assertions.assertThat(patrick).isNotEqualTo(bob);
+		Assertions.assertThat(patrick).isEqualTo(patrick).isNotEqualTo(bob);
 	}
 
 	@ParameterizedTest

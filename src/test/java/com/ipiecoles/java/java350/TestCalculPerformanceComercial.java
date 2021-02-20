@@ -61,7 +61,7 @@ class TestCalculPerformanceComercial {
 	}
 
 	@Test
-	public void testCalcPerfCommercialNeg() throws EntityExistsException, EmployeException {
+	void testCalcPerfCommercialNeg() throws EntityExistsException, EmployeException {
 		employeService.embaucheEmploye("Zeubi", "La Mouche", Poste.COMMERCIAL, NiveauEtude.MASTER, 1.0);
 
 		ArgumentCaptor<Employe> eCaptor = ArgumentCaptor.forClass(Employe.class);
@@ -83,7 +83,7 @@ class TestCalculPerformanceComercial {
 	}
 
 	@Test
-	public void testEmployeNotComercial() throws EntityExistsException, EmployeException {
+	void testEmployeNotComercial() throws EntityExistsException, EmployeException {
 		employeService.embaucheEmploye("Zeubi", "La Mouche", Poste.TECHNICIEN, NiveauEtude.MASTER, 1.0);
 
 		ArgumentCaptor<Employe> eCaptor = ArgumentCaptor.forClass(Employe.class);
