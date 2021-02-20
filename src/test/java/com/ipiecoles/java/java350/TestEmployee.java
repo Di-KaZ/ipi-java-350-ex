@@ -65,7 +65,6 @@ class TestEmployee {
 		Assertions.assertThatThrownBy(() -> employe.augmenterSalaire(pourcentage))
 				.hasMessage("Impossible d'augementer le salaire avec un pourcentage negatif");
 	}
-
 	@ParameterizedTest
 	@CsvSource({ "0.1", "0.5", "0.99" })
 	void testAugementerSalaireZeros(double pourcentage) {
