@@ -33,3 +33,7 @@ mvnw*
 
 
 logs
+
+### Gauge ###
+reports
+.gauge

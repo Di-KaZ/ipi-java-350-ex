@@ -1,6 +1,6 @@
-package com.ipiecoles.java;
+package com.ipiecoles.java.java350.Gauge;
 
-import com.ipiecoles.java.java350.Java350Application;
+import com.ipiecoles.java.java350.SpringGaugeTestApp;
 import com.thoughtworks.gauge.ClassInitializer;
 
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
@@ -13,7 +13,7 @@ public class RegisterIOC implements ClassInitializer {
 
 	static {
 		// Initiate the application context only one-time
-		applicationContext = new AnnotationConfigApplicationContext(Java350Application.class);
+		applicationContext = new AnnotationConfigApplicationContext(SpringGaugeTestApp.class);
 	}
 
 	/**
