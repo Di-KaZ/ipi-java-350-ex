@@ -48,7 +48,7 @@ class TestAvgPerformanceMatricule {
 		employeRepository.save(employe);
 
 		Assertions.assertThat(employeRepository.avgPerformanceWhereMatriculeStartsWith(posteLetter))
-				.isEqualTo((double) performance.intValue());
+				.isEqualTo((double) performance);
 	}
 
 	@ParameterizedTest

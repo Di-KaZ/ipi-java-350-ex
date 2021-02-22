@@ -104,6 +104,7 @@ public class EmployeService {
 	 * @throws EmployeException Si le matricule est null ou ne commence pas par un C
 	 */
 	public void calculPerformanceCommercial(String matricule, Long caTraite, Long objectifCa) throws EmployeException {
+		LOGGER.info("[{}] {} to {}", matricule, caTraite, objectifCa);
 		// Vérification des paramètres d'entrée
 		if (caTraite == null || caTraite < 0) {
 			throw new EmployeException("Le chiffre d'affaire traité ne peut être négatif ou null !");
@@ -116,6 +117,7 @@ public class EmployeService {
 		}
 		// Recherche de l'employé dans la base
 		Employe employe = employeRepository.findByMatricule(matricule);
+		LOGGER.info("EMPLOYE FOUND {}", employe);
 		if (employe == null) {
 			throw new EmployeException("Le matricule " + matricule + " n'existe pas !");
 		}
@@ -123,18 +125,22 @@ public class EmployeService {
 		Integer performance = Entreprise.PERFORMANCE_BASE;
 		// Cas 2
 		if (caTraite >= objectifCa * 0.8 && caTraite < objectifCa * 0.95) {
+			LOGGER.info("CAS 2");
 			performance = Math.max(Entreprise.PERFORMANCE_BASE, employe.getPerformance() - 2);
 		}
 		// Cas 3
 		else if (caTraite >= objectifCa * 0.95 && caTraite <= objectifCa * 1.05) {
+			LOGGER.info("CAS 3");
 			performance = Math.max(Entreprise.PERFORMANCE_BASE, employe.getPerformance());
 		}
 		// Cas 4
 		else if (caTraite <= objectifCa * 1.2 && caTraite > objectifCa * 1.05) {
+			LOGGER.info("CAS 4");
 			performance = employe.getPerformance() + 1;
 		}
 		// Cas 5
 		else if (caTraite > objectifCa * 1.2) {
+			LOGGER.info("CAS 5");
 			performance = employe.getPerformance() + 4;
 		}
 		// Si autre cas, on reste à la performance de base.

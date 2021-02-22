@@ -8,6 +8,7 @@ import com.ipiecoles.java.java350.model.NiveauEtude;
 import com.ipiecoles.java.java350.model.Poste;
 import com.ipiecoles.java.java350.repository.EmployeRepository;
 import com.ipiecoles.java.java350.service.EmployeService;
+import com.thoughtworks.gauge.AfterScenario;
 import com.thoughtworks.gauge.BeforeScenario;
 import com.thoughtworks.gauge.Step;
 
@@ -27,42 +28,44 @@ public class GaugeServices {
 	EmployeRepository employeRepository;
 
 	@BeforeScenario
+	@AfterScenario
 	public void setup() {
 		employeRepository.deleteAll();
-		employee = null;
+		employe = null;
 	}
 
-	private Employe employee = null;
+	public Employe employe = null;
 
-	@Step("Embaucher <nom> <prenom> en tant que <poste> avec un niveau d'étude a <nivEtude>")
+	@Step("Embaucher <nom> <prenom> en tant que <poste> avec un niveau d'étude à <nivEtude>")
 	public void testEmbaucheEmploye(String nom, String prenom, Poste poste, NiveauEtude nivEtude) {
 		try {
-			// utilisépour le testde la perf commercial il est reset a chaquenario
-			employee = employeService.embaucheEmploye(nom, prenom, poste, nivEtude, 1.0);
+			// utilisepour le testde la perf commercial il est reset à chaquenario
+			employe = employeService.embaucheEmploye(nom, prenom, poste, nivEtude, 1.0);
 		} catch (Exception e) {
 			LOGGER.error("{}", e.getMessage());
 		}
-		Assertions.assertThat(employee.getNom()).isEqualTo(nom);
-		Assertions.assertThat(employee.getPrenom()).isEqualTo(prenom);
-		Assertions.assertThat(employee.getMatricule().charAt(0)).isEqualTo(poste.name().charAt(0));
-		LOGGER.warn("commercial {}", employee);
+		Assertions.assertThat(employe.getNom()).isEqualTo(nom);
+		Assertions.assertThat(employe.getPrenom()).isEqualTo(prenom);
+		Assertions.assertThat(employe.getMatricule().charAt(0)).isEqualTo(poste.name().charAt(0));
 	}
 
-	@Step("La performance actuelle de l'employe est de <perf>")
-	void testSetEmployePef(Integer perf) {
-		LOGGER.warn("commercial {}", employee);
-		employee.setPerformance(perf);
+	@Step("La performance actuelle de l'employé est de <perf>")
+	public void testSetEmployePef(Integer perf) {
+		LOGGER.info("perfomance de l'employé mise à {}", perf);
+		employe.setPerformance(perf);
+		employeRepository.save(employe);
 	}
 
-	@Step("L'employe a réalisé <caTraite> de chiffre et avait un objectif fixé à <objectifCa>")
-	void testCalcPerfCommercial(Long caTraite, Long objectifCa) throws EntityExistsException, EmployeException {
-		LOGGER.warn("commercial {}", employee);
-		employeService.calculPerformanceCommercial(employee.getMatricule(), caTraite, objectifCa);
+	@Step("L'employe à realisé <caTraite> de chiffre et avait un objectif fixé à <objectifCa>")
+	public void testCalcPerfCommercial(Long caTraite, Long objectifCa) throws EntityExistsException, EmployeException {
+		employeService.calculPerformanceCommercial(employe.getMatricule(), caTraite, objectifCa);
 	}
 
-	@Step("La performance de l'employe apres recalcul doit etre egal à <perfAttendu>")
-	void testPerfAttendu(Integer perfAttendu) {
-		LOGGER.warn("commercial {}", employee);
-		Assertions.assertThat(employee.getPerformance()).isEqualTo(perfAttendu);
+	@Step("La performance de l'employé apres recalcul doit etre egal à <perfAttendu>")
+	public void testPerfAttendu(Integer perfAttendu) {
+		LOGGER.info("emplye avant {}", employe);
+		employe = employeRepository.findByMatricule(employe.getMatricule());
+		LOGGER.info("emplye apres {}", employe);
+		Assertions.assertThat(employe.getPerformance()).isEqualTo(perfAttendu);
 	}
 }

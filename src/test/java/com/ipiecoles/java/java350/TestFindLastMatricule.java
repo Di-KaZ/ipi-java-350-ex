@@ -20,9 +20,9 @@ class TestFindLastMatricule {
 	@Autowired
 	private EmployeRepository employeRepository;
 
-	private String nom = "Sébastien";
-	private String prenom = "Patrick";
-	private Double tmpsPart = 1.0;
+	private final String nom = "Sébastien";
+	private final String prenom = "Patrick";
+	private final Double tmpsPart = 1.0;
 
 	@BeforeEach
 	@AfterEach
