@@ -47,15 +47,13 @@ class TestEmbaucheEmploye {
 			"MANAGER, BAC, 1.0, M00001, 1673.34", "MANAGER, MASTER, 1.0, M00001, 2129.71", })
 	void testEmbaucheEmploye(Poste poste, NiveauEtude nivEtu, Double tmpsPart, String matriculeFinal,
 			Double salaireFinal) {
-		Employe employe = null;
 		try {
-			employe = employeService.embaucheEmploye(nom, prenom, poste, nivEtu, tmpsPart);
+			employeService.embaucheEmploye(nom, prenom, poste, nivEtu, tmpsPart);
 		} catch (Exception e) {
 
 		}
 		ArgumentCaptor<Employe> eCaptor = ArgumentCaptor.forClass(Employe.class);
 		Mockito.verify(employeRepository, Mockito.times(1)).save(eCaptor.capture());
-		Assertions.assertThat(employe).isEqualTo(eCaptor.getValue());
 		Assertions.assertThat(eCaptor.getValue().getMatricule()).isEqualTo(matriculeFinal);
 		Assertions.assertThat(eCaptor.getValue().getSalaire()).isEqualTo(salaireFinal);
 		Assertions.assertThat(eCaptor.getValue().getPrenom()).isEqualTo(prenom);
