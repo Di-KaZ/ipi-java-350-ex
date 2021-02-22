@@ -1,5 +1,6 @@
 # TP sur la qualité logicielle
 
+[![Build Status](https://travis-ci.com/Di-KaZ/ipi-java-350-ex.svg?branch=eval)](https://travis-ci.com/Di-KaZ/ipi-java-350-ex)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=Di-KaZ_ipi-java-350-ex&metric=coverage)](https://sonarcloud.io/dashboard?id=Di-KaZ_ipi-java-350-ex)
 Exercices de Java, module 350 pour l'IPI. Il est nécessaire de forker ce repository pour pouvoir faire tout le TP !! Après chaque question, pusher vos modifications sur votre repository.
 
