@@ -262,4 +262,13 @@ public class Employe {
 	public int hashCode() {
 		return Objects.hash(id, nom, prenom, matricule, dateEmbauche, salaire, performance);
 	}
+
+	@Override
+	public String toString() {
+		return "{" + " id='" + getId() + "'" + ", nom='" + getNom() + "'" + ", prenom='" + getPrenom() + "'"
+				+ ", matricule='" + getMatricule() + "'" + ", dateEmbauche='" + getDateEmbauche() + "'" + ", salaire='"
+				+ getSalaire() + "'" + ", performance='" + getPerformance() + "'" + ", tempsPartiel='"
+				+ getTempsPartiel() + "'" + "}";
+	}
+
 }

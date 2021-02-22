@@ -13,7 +13,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>java350</name>
 	<description>TP qualité logicielle IPI</description>
-
 	<properties>
 		<java.version>1.11</java.version>
 		<sonar.projectKey>Di-KaZ_ipi-java-350-ex</sonar.projectKey>
@@ -81,13 +80,6 @@
 			<version>5.3.0</version>
 			<scope>test</scope>
 		</dependency>
-        <dependency>
-            <groupId>com.thoughtworks.gauge</groupId>
-            <artifactId>gauge-java</artifactId>
-            <version>0.7.13</version>
-            <scope>compile</scope>
-        </dependency>
-
     </dependencies>
 
 	<build>
@@ -158,12 +150,12 @@
 			<plugin>
 				<groupId>com.thoughtworks.gauge.maven</groupId>
 				<artifactId>gauge-maven-plugin</artifactId>
-				<version>1.4.3</version>
+				<version>1.4.2</version>
 				<executions>
 					<execution>
 						<phase>test</phase>
 						<configuration>
-							<specsDir>src/test/resources/specs</specsDir>
+							<specsDir>specs</specsDir>
 						</configuration>
 						<goals>
 							<goal>execute</goal>
