@@ -32,30 +32,35 @@ class TestFindLastMatricule {
 
 	@Test
 	void testwithOneEmployee() {
-		employeRepository.save(new Employe(nom, prenom, "T00001", LocalDate.now(), 1200.0, 1, 1.0));
-		Employe employe = employeRepository.findByMatricule("T00001");
-		Assertions.assertThat(employe).isNotNull();
-		Assertions.assertThat(employe.getNom()).isEqualTo(nom);
-		Assertions.assertThat(employe.getPrenom()).isEqualTo(prenom);
-		Assertions.assertThat(employe.getSalaire()).isEqualTo(1200.0);
-		Assertions.assertThat(employe.getTempsPartiel()).isEqualTo(tmpsPart);
-		Assertions.assertThat(employe.getDateEmbauche()).isEqualTo(LocalDate.now());
-		Assertions.assertThat(employe.getMatricule()).isEqualTo("T00001");
+
+		Employe employeSave = employeRepository
+				.save(new Employe(nom, prenom, "T00001", LocalDate.now(), 1200.0, 1, 1.0));
+		Employe employeRecup = employeRepository.findByMatricule("T00001");
+		Assertions.assertThat(employeRecup).isNotNull();
+		Assertions.assertThat(employeRecup).isEqualTo(employeSave);
+		Assertions.assertThat(employeRecup.getNom()).isEqualTo(nom);
+		Assertions.assertThat(employeRecup.getPrenom()).isEqualTo(prenom);
+		Assertions.assertThat(employeRecup.getSalaire()).isEqualTo(1200.0);
+		Assertions.assertThat(employeRecup.getTempsPartiel()).isEqualTo(tmpsPart);
+		Assertions.assertThat(employeRecup.getDateEmbauche()).isEqualTo(LocalDate.now());
+		Assertions.assertThat(employeRecup.getMatricule()).isEqualTo("T00001");
 	}
 
 	@Test
 	void testWithMutipleEmployee() {
 		employeRepository.save(new Employe(nom, prenom, "T00001", LocalDate.now(), 1200.0, 1, 1.0));
 		employeRepository.save(new Employe(nom, prenom, "C00002", LocalDate.now(), 1200.0, 1, 1.0));
-		employeRepository.save(new Employe(nom, prenom, "M00003", LocalDate.now(), 1200.0, 1, 1.0));
-		Employe employe = employeRepository.findByMatricule("M00003");
-		Assertions.assertThat(employe).isNotNull();
-		Assertions.assertThat(employe.getNom()).isEqualTo(nom);
-		Assertions.assertThat(employe.getPrenom()).isEqualTo(prenom);
-		Assertions.assertThat(employe.getSalaire()).isEqualTo(1200.0);
-		Assertions.assertThat(employe.getTempsPartiel()).isEqualTo(tmpsPart);
-		Assertions.assertThat(employe.getDateEmbauche()).isEqualTo(LocalDate.now());
-		Assertions.assertThat(employe.getMatricule()).isEqualTo("M00003");
+		Employe employeSave = employeRepository
+				.save(new Employe(nom, prenom, "M00003", LocalDate.now(), 1200.0, 1, 1.0));
+		Employe employeRecup = employeRepository.findByMatricule("M00003");
+		Assertions.assertThat(employeRecup).isEqualTo(employeSave);
+		Assertions.assertThat(employeRecup).isNotNull();
+		Assertions.assertThat(employeRecup.getNom()).isEqualTo(nom);
+		Assertions.assertThat(employeRecup.getPrenom()).isEqualTo(prenom);
+		Assertions.assertThat(employeRecup.getSalaire()).isEqualTo(1200.0);
+		Assertions.assertThat(employeRecup.getTempsPartiel()).isEqualTo(tmpsPart);
+		Assertions.assertThat(employeRecup.getDateEmbauche()).isEqualTo(LocalDate.now());
+		Assertions.assertThat(employeRecup.getMatricule()).isEqualTo("M00003");
 	}
 
 	@Test
