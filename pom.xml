@@ -13,9 +13,8 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<name>java350</name>
 	<description>TP qualité logicielle IPI</description>
-
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>1.11</java.version>
 		<sonar.projectKey>Di-KaZ_ipi-java-350-ex</sonar.projectKey>
 		<sonar.organization>get-moussed</sonar.organization>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -66,7 +65,7 @@
 		<dependency>
 			<groupId>com.thoughtworks.gauge</groupId>
 			<artifactId>gauge-java</artifactId>
-			<version>0.7.2</version>
+			<version>0.7.13</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
@@ -81,33 +80,13 @@
 			<version>5.3.0</version>
 			<scope>test</scope>
 		</dependency>
-
-	</dependencies>
+    </dependencies>
 
 	<build>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.jacoco</groupId>
-				<artifactId>jacoco-maven-plugin</artifactId>
-				<version>0.8.5</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>prepare-agent</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>report</id>
-						<phase>prepare-package</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
@@ -157,10 +136,30 @@
 					<execution>
 						<phase>test</phase>
 						<configuration>
-							<specsDir>src/test/resources/specs</specsDir>
+							<specsDir>specs</specsDir>
 						</configuration>
 						<goals>
 							<goal>execute</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.jacoco</groupId>
+				<artifactId>jacoco-maven-plugin</artifactId>
+				<version>0.8.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>prepare-agent</goal>
+						</goals>
+					</execution>
+					<!-- attached to Maven test phase -->
+					<execution>
+						<id>report</id>
+						<phase>test</phase>
+						<goals>
+							<goal>report</goal>
 						</goals>
 					</execution>
 				</executions>

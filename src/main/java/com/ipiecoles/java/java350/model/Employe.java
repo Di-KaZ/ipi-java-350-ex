@@ -2,15 +2,22 @@ package com.ipiecoles.java.java350.model;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.util.Objects;
+import java.util.Locale;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import com.ipiecoles.java.java350.exception.EmployeException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Entity
 public class Employe {
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(Employe.class);
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -39,7 +46,7 @@ public class Employe {
 		this.prenom = prenom;
 		this.matricule = matricule;
 		this.dateEmbauche = dateEmbauche;
-		this.salaire = salaire;
+		this.salaire = Double.parseDouble(String.format(Locale.ROOT, "%.2f", salaire));
 		this.performance = performance;
 		this.tempsPartiel = tempsPartiel;
 	}
@@ -51,7 +58,8 @@ public class Employe {
 	 * @return
 	 */
 	public Integer getNombreAnneeAnciennete() {
-		return LocalDate.now().getYear() - dateEmbauche.getYear();
+		Integer ancienete = dateEmbauche != null ? LocalDate.now().getYear() - dateEmbauche.getYear() : 0;
+		return ancienete < 0 ? 0 : ancienete;
 	}
 
 	public Integer getNbConges() {
@@ -63,26 +71,31 @@ public class Employe {
 	}
 
 	public Integer getNbRtt(LocalDate d) {
-		int i1 = d.isLeapYear() ? 365 : 366;
-		int var = 104;
+		int nbDaysInCurrentYear = d.isLeapYear() ? 366 : 365;
+		int nbOfweekenddays = 104;
+
 		switch (LocalDate.of(d.getYear(), 1, 1).getDayOfWeek()) {
-			case THURSDAY:
-				if (d.isLeapYear())
-					var = var + 1;
-				break;
 			case FRIDAY:
-				if (d.isLeapYear())
-					var = var + 2;
-				else
-					var = var + 1;
+				if (d.isLeapYear()) {
+					nbOfweekenddays += 2;
+				} else {
+					nbOfweekenddays += 1;
+				}
+				break;
 			case SATURDAY:
-				var = var + 1;
+				nbOfweekenddays += 1;
+				break;
+			default:
 				break;
 		}
-		int monInt = (int) Entreprise.joursFeries(d).stream()
+
+		long nbJourFerieNotWeekend = Entreprise.joursFeries(d).stream()
 				.filter(localDate -> localDate.getDayOfWeek().getValue() <= DayOfWeek.FRIDAY.getValue()).count();
-		return (int) Math
-				.ceil((i1 - Entreprise.NB_JOURS_MAX_FORFAIT - var - Entreprise.NB_CONGES_BASE - monInt) * tempsPartiel);
+		Double test = (nbDaysInCurrentYear - Entreprise.NB_JOURS_MAX_FORFAIT - nbOfweekenddays - nbJourFerieNotWeekend
+				- Entreprise.NB_CONGES_BASE) * tempsPartiel;
+		LOGGER.debug("{}, {} - {} - {} - {} - {} = {}", d, nbDaysInCurrentYear, Entreprise.NB_JOURS_MAX_FORFAIT,
+				nbOfweekenddays, nbJourFerieNotWeekend, Entreprise.NB_CONGES_BASE, test);
+		return test.intValue();
 	}
 
 	/**
@@ -127,7 +140,14 @@ public class Employe {
 	}
 
 	// Augmenter salaire
-	// public void augmenterSalaire(double pourcentage){}
+	public void augmenterSalaire(double pourcentage) throws EmployeException {
+		if (pourcentage < 0.0) {
+			throw new EmployeException("Impossible d'augementer le salaire avec un pourcentage negatif");
+		} else if (pourcentage < 1.0) {
+			throw new EmployeException("Impossible d'augementer le salaire avec un pourcentage inferieur a 1");
+		}
+		salaire *= pourcentage;
+	}
 
 	public Long getId() {
 		return id;
@@ -198,14 +218,14 @@ public class Employe {
 	 * @return the salaire
 	 */
 	public Double getSalaire() {
-		return salaire;
+		return Double.parseDouble(String.format(Locale.ROOT, "%.2f", salaire));
 	}
 
 	/**
 	 * @param salaire the salaire to set
 	 */
 	public void setSalaire(Double salaire) {
-		this.salaire = salaire;
+		this.salaire = Double.parseDouble(String.format(Locale.ROOT, "%.2f", salaire));
 	}
 
 	public Integer getPerformance() {
@@ -225,20 +245,11 @@ public class Employe {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Employe))
-			return false;
-		Employe employe = (Employe) o;
-		return Objects.equals(id, employe.id) && Objects.equals(nom, employe.nom)
-				&& Objects.equals(prenom, employe.prenom) && Objects.equals(matricule, employe.matricule)
-				&& Objects.equals(dateEmbauche, employe.dateEmbauche) && Objects.equals(salaire, employe.salaire)
-				&& Objects.equals(performance, employe.performance);
+	public String toString() {
+		return "{" + " id='" + getId() + "'" + ", nom='" + getNom() + "'" + ", prenom='" + getPrenom() + "'"
+				+ ", matricule='" + getMatricule() + "'" + ", dateEmbauche='" + getDateEmbauche() + "'" + ", salaire='"
+				+ getSalaire() + "'" + ", performance='" + getPerformance() + "'" + ", tempsPartiel='"
+				+ getTempsPartiel() + "'" + "}";
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(id, nom, prenom, matricule, dateEmbauche, salaire, performance);
-	}
 }
